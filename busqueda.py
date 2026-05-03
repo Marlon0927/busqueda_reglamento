@@ -21,7 +21,7 @@ documents = [
 ]
 
 # Termino a buscar
-termino_buscado = "créditos"
+termino_buscado = "reingresa"
 
 # Total de documentos
 N = len(documents)
