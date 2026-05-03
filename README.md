@@ -2,15 +2,12 @@
 
 Este proyecto implementa un sistema de búsqueda semántica tipo RAG (Retrieval Augmented Generation) sobre documentos PDF, utilizando embeddings de Google Gemini y una base vectorial con ChromaDB.
 
-============================================================
 OBJETIVO
-============================================================
 
 Permitir realizar preguntas en lenguaje natural sobre documentos PDF (reglamentos, programas de asignaturas, etc.) y obtener respuestas basadas únicamente en el contenido del documento, evitando alucinaciones del modelo.
 
-============================================================
+
 ARQUITECTURA DEL SISTEMA
-============================================================
 
 1. Carga de documentos PDF
 2. División en fragmentos (chunks)
@@ -20,9 +17,8 @@ ARQUITECTURA DEL SISTEMA
 6. Construcción de prompt aumentado (RAG)
 7. Respuesta basada en contexto
 
-============================================================
+
 INSTALACIÓN
-============================================================
 
 Crear entorno virtual:
 python -m venv env
@@ -36,17 +32,15 @@ pip install python-dotenv
 pip install scikit-learn
 pip install numpy
 
-============================================================
+
 CONFIGURACIÓN API KEY
-============================================================
 
 Crear archivo .env:
 
 GOOGLE_API_KEY=tu_api_key_aqui
 
-============================================================
+
 CHUNKING (PDF → fragmentos)
-============================================================
 
 - Lee PDFs de la carpeta /pdfs
 - Divide en fragmentos de 500 caracteres
@@ -55,26 +49,23 @@ CHUNKING (PDF → fragmentos)
 chunk_size=500
 chunk_overlap=50
 
-============================================================
+
 CHROMADB (BASE VECTORIAL)
-============================================================
 
 - Usa embeddings de Google Gemini (gemini-embedding-001)
 - Convierte chunks en vectores
 - Guarda en ./chroma_db
 
-============================================================
+
 RETRIEVER
-============================================================
 
 - Recupera los 5 fragmentos más relevantes
 
 search_type="similarity"
 k=5
 
-============================================================
+
 PROMPT AUMENTADO (RAG)
-============================================================
 
 Estructura:
 
@@ -90,16 +81,14 @@ Pregunta del usuario
 [RESPUESTA]
 Generada por el LLM
 
-============================================================
+
 BÚSQUEDA SEMÁNTICA MANUAL
-============================================================
 
 - embeddings directos
 - cosine similarity con sklearn
 
-============================================================
+
 TECNOLOGÍAS
-============================================================
 
 - LangChain
 - Google Gemini Embeddings
@@ -109,9 +98,8 @@ TECNOLOGÍAS
 - NumPy
 - Python 3.10+
 
-============================================================
+
 PROBLEMAS RESUELTOS
-============================================================
 
 - Embeddings inconsistentes
 - persist() obsoleto
@@ -120,17 +108,15 @@ PROBLEMAS RESUELTOS
 - base vectorial vacía
 - orden de ejecución incorrecto
 
-============================================================
+
 EJECUCIÓN
-============================================================
 
 1. python chunking.py
 2. python chromaDB.py
 3. python retriever.py
 
-============================================================
+
 RESULTADO
-============================================================
 
 Responde preguntas como:
 - Temas del curso
