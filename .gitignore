@@ -1,0 +1,49 @@
+# 🔹 Entornos virtuales
+env/
+venv/
+.venv/
+.env
+
+# 🔹 Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc.*
+
+# 🔹 Variables de entorno (MUY IMPORTANTE)
+.env
+
+# 🔹 Jupyter Notebook
+.ipynb_checkpoints/
+
+# 🔹 Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# 🔹 Logs
+*.log
+
+# 🔹 Archivos temporales
+*.tmp
+
+# 🔹 Bases de datos locales (tu caso)
+chroma_db/
+chroma_db_notebook_2/
+
+# 🔹 Archivos generados
+*.pkl
+
+# 🔹 VSCode
+.vscode/
+
+# 🔹 PyCharm
+.idea/
+
+# 🔹 Distribución / build
+build/
+dist/
+*.egg-info/
+
+# 🔹 Caché de herramientas
+.cache/

@@ -1,6 +1,7 @@
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import pickle
 
 # 📁 Ruta de la carpeta con PDFs
 carpeta = "pdfs" 
@@ -40,3 +41,6 @@ print(f' Fuente: {chunks[index].metadata.get("source", "?")}')
 print(f' Página: {chunks[index].metadata.get("page", "?")}')
 print(f' Longitud: {len(chunks[index].page_content)} caracteres')
 print(f' Contenido:\n{chunks[index].page_content}')
+
+with open("chunks.pkl", "wb") as f:
+    pickle.dump(chunks, f)

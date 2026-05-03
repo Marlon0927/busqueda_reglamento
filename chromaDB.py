@@ -1,29 +1,56 @@
 import os
-from langchain_chroma import Chroma
 import shutil
+import pickle
+from dotenv import load_dotenv
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_chroma import Chroma
 
-PERSIST_DIR = './chroma_db_notebook_2'
+# 🔹 1. Cargar API KEY desde .env
+load_dotenv()
+API_KEY = os.getenv("GOOGLE_API_KEY")
 
-# Limpiar base de datos anterior para re-ejecutar el notebook limpiamente
+if not API_KEY:
+    raise ValueError("No se encontró GOOGLE_API_KEY en el .env")
+
+# 🔹 2. Cargar chunks desde archivo (generado en chunking.py)
+with open("chunks.pkl", "rb") as f:
+    chunks = pickle.load(f)
+
+print(f"Chunks cargados: {len(chunks)}")
+
+if len(chunks) == 0:
+    raise ValueError("No hay chunks. Revisa tu proceso de chunking.")
+
+# 🔹 3. Inicializar modelo de embeddings
+embeddings_model = GoogleGenerativeAIEmbeddings(
+    model="gemini-embedding-001",
+    google_api_key=API_KEY
+)
+
+# 🔹 4. Configuración de Chroma
+PERSIST_DIR = "./chroma_db"
+
+# Limpiar base anterior (opcional)
 if os.path.exists(PERSIST_DIR):
     shutil.rmtree(PERSIST_DIR)
-    print(f'Base de datos anterior eliminada: {PERSIST_DIR}')
+    print(f"Base de datos anterior eliminada: {PERSIST_DIR}")
 
-print(f'Indexando {len(chunks)} fragmentos en ChromaDB...')
-print('(Esto puede tardar unos minutos — se generan embeddings para cada fragmento)')
+# 🔹 5. Crear base vectorial
+print(f"Indexando {len(chunks)} fragmentos en ChromaDB...")
+print("(Esto puede tardar unos minutos...)")
 
 vector_store = Chroma.from_documents(
     documents=chunks,
     embedding=embeddings_model,
     persist_directory=PERSIST_DIR,
     collection_name="mi_reglamento",
-    collection_metadata={'hnsw:space': 'cosine'}
+    collection_metadata={"hnsw:space": "cosine"}
 )
 
+# 🔹 6. Validación
 total = vector_store._collection.count()
-print()
-print('[OK] Base vectorial creada exitosamente!')
-print(f'  Ubicación en disco:     {PERSIST_DIR}/')
-print(f'  Fragmentos indexados:   {total}')
-print(f'  Motor de búsqueda:      ChromaDB (similitud coseno)')
-print(f'  Dimensión de vectores:  768')
+
+print("\n[OK] Base vectorial creada exitosamente!")
+print(f"Ubicación: {PERSIST_DIR}/")
+print(f"Fragmentos indexados: {total}")
+print("Motor: ChromaDB (cosine similarity)")
