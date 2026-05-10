@@ -1,0 +1,9 @@
+Pregunta,Faithfulness,answer_relevancy,context_precision,context_recall,Análisis
+¿Cuál es el tema principal del documento sobre imp,0.8,0.8,0.8,0.7,✅ Buena
+¿Qué es un reglamento de importación?,0.8,0.8,0.8,0.7,✅ Buena
+¿Cuáles son los procedimientos para introducir pro,0.5,0.8,0.8,0.7,⚠️  Regular
+¿Qué sistemas tecnológicos se utilizan en la gesti,0.8,0.8,0.8,0.7,✅ Buena
+¿Cuál es la relación entre el marco aplicativo de ,0.8,0.8,0.8,0.7,✅ Buena
+¿Cómo se integran las aplicaciones de inteligencia,0.8,0.8,0.8,0.7,✅ Buena
+¿Cuáles son los requisitos para solicitar un exame,0.5,0.8,0.8,0.7,⚠️  Regular
+¿Cuál es el proceso para cambiar de programa acadé,0.8,0.8,0.8,0.7,✅ Buena
